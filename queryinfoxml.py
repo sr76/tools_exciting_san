@@ -6,4 +6,4 @@ import sys
 
 def getLastTotalEnergy(fname):
     tree = etree.parse(fname)
-    return tree.xpath('/info/groundstate/scl/iter')[-1][0].get("totalEnergy")
+    return tree.xpath('/info/groundstate/scl/iter[last()]/energies/@totalEnergy')
