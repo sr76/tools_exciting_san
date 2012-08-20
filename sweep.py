@@ -40,6 +40,7 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
             sweeplog.write("\t"+"value  "+value+"\n")
 
             inputdscr=inputdscr+"sweeping variable: "+xpath+"\n"
+            inputdscr=inputdscr+"value: "+value+"\n"
             
             setinput.setbyxpath(inputtree,xpath,value)
         
@@ -52,11 +53,19 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     rundirlog.close()
 
 runspath="/home1/srigamonti/projects/cobalt_bulk/runs"
-resultspath="/home1/srigamonti/projects/cobalt_bulk/results/sweepkgrid"
-inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/runs/20/input.xml"
+resultspath="/home1/srigamonti/projects/cobalt_bulk/results/sweepnempty"
+inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/runs/1345477785053/input.xml"
 sweepdicarr=[]
-sweepdicarr.append({"/input/groundstate/@ngridk":"34 34 32"})
-sweepdicarr.append({"/input/groundstate/@ngridk":"5 5 27"})
+sweepdicarr.append({"/input/groundstate/@nempty":"1"})
+sweepdicarr.append({"/input/groundstate/@nempty":"2"})
+sweepdicarr.append({"/input/groundstate/@nempty":"3"})
+sweepdicarr.append({"/input/groundstate/@nempty":"4"})
+sweepdicarr.append({"/input/groundstate/@nempty":"5"})
+sweepdicarr.append({"/input/groundstate/@nempty":"6"})
+sweepdicarr.append({"/input/groundstate/@nempty":"7"})
+sweepdicarr.append({"/input/groundstate/@nempty":"8"})
+sweepdicarr.append({"/input/groundstate/@nempty":"9"})
+sweepdicarr.append({"/input/groundstate/@nempty":"10"})
 
 
 sweep(runspath,resultspath,inputtemplatepath,sweepdicarr)
