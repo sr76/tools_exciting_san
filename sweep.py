@@ -18,17 +18,17 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     inputtree = etree.parse(inputtemplatepath)
 
     for irun, sweepdic in enumerate(sweepdicarr):
-        runpath, rundir = tstamp_folder(runspath)
-        os.chdir(runpath)
+        #runpath, rundir = tstamp_folder(runspath)
+        #os.chdir(runpath)
 
         for xpath,value in sweepdic.items():
-            setinput.setbyxpath(inputtree,xpath,value):
+            setinput.setbyxpath(inputtree,xpath,value)
             
 
 
 runspath="/home1/srigamonti/projects/cobalt_bulk/runs"
 resultspath="/home1/srigamonti/projects/cobalt_bulk/results/sweepkgrid"
-inputtemplatespath="/home1/srigamonti/projects/cobalt_bulk/results/sweepkgrid/input.xml"
+inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/results/sweepkgrid/input.xml"
 sweepdicarr=[]
 sweepdicarr.append({"/input/groundstate/@ngridk":"34 34 32"})
 sweepdicarr.append({"/input/groundstate/@ngridk":"5 5 27"})
