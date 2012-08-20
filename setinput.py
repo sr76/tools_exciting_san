@@ -8,4 +8,6 @@ def setbyxpath(inputtree,xpath,value):
         attrib = xpath.split("/@")[1]
         inputtree.xpath(element)[0].attrib[attrib]=value
 
-    
+    else:
+        inputtree.xpath(xpath)[0].text = value
+

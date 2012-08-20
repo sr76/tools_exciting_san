@@ -15,19 +15,26 @@ def tstamp_folder(rpath):
 
 def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     sweeplog = open(resultspath+"/sweep.log","w+")
-    sweeplog.write("runspath  "+runspath)
-    sweeplog.write("resultspath  "+resultspath)
+    sweeplog.write("runspath  "+runspath+"\n")
+    sweeplog.write("resultspath  "+resultspath+"\n")
+    sweeplog.write("inputtemplatepath  "+inputtemplatepath+"\n")
 
     inputtree = etree.parse(inputtemplatepath)
 
     for irun, sweepdic in enumerate(sweepdicarr):
-        #runpath, rundir = tstamp_folder(runspath)
-        #os.chdir(runpath)
+        runpath, rundir = tstamp_folder(runspath)
+        os.chdir(runpath)
+        sweeplog.write("\n"+"runpath  "+runpath+"\n")
+
+        setinput.setbyxpath(inputtree,"/input/keywords","sdfsdf")
 
         for xpath,value in sweepdic.items():
+            sweeplog.write("\t"+"sweepvar  "+xpath+"\n")
+            sweeplog.write("\t"+"value  "+value+"\n")
+
             setinput.setbyxpath(inputtree,xpath,value)
         
-        inputtree.write(resultspath+"/input.xml",pretty_print="true")
+        inputtree.write(runpath+"/input.xml",pretty_print="true")
         
         
     sweeplog.close()
