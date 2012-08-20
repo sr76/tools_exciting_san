@@ -14,6 +14,9 @@ def tstamp_folder(rpath):
 
 
 def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
+    sweeplog = open(resultspath+"/sweep.log","w+")
+    sweeplog.write("runspath  "+runspath)
+    sweeplog.write("resultspath  "+resultspath)
 
     inputtree = etree.parse(inputtemplatepath)
 
@@ -23,12 +26,15 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
 
         for xpath,value in sweepdic.items():
             setinput.setbyxpath(inputtree,xpath,value)
-            
-
+        
+        inputtree.write(resultspath+"/input.xml",pretty_print="true")
+        
+        
+    sweeplog.close()
 
 runspath="/home1/srigamonti/projects/cobalt_bulk/runs"
 resultspath="/home1/srigamonti/projects/cobalt_bulk/results/sweepkgrid"
-inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/results/sweepkgrid/input.xml"
+inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/runs/20/input.xml"
 sweepdicarr=[]
 sweepdicarr.append({"/input/groundstate/@ngridk":"34 34 32"})
 sweepdicarr.append({"/input/groundstate/@ngridk":"5 5 27"})
