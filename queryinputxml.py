@@ -12,11 +12,12 @@ def getByXpath(xpath,fname):
         return tree.xpath(xpath)[0].text
 
 
+"""
+# Example of use
 
 xpath = "/input/structure/crystal/basevect[3]"
 xpath = "/input/structure/crystal/@scale"
 xpath = "/input/structure/crystal/basevect[3]"
 fname = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227/input.xml"
-
-
 print getByXpath(xpath,fname)
+"""
