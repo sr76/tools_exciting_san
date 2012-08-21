@@ -42,9 +42,9 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
             inputdscr=inputdscr+"sweeping variable: "+xpath+"\n"
             inputdscr=inputdscr+"value: "+value+"\n"
             
-            setinput.setbyxpath(inputtree,xpath,value)
+            setinput.setByXpath(inputtree,xpath,value)
         
-        setinput.setbyxpath(inputtree,"/input/keywords",inputdscr)
+        setinput.setByXpath(inputtree,"/input/keywords",inputdscr)
 
         inputtree.write(runpath+"/input.xml",pretty_print="true")
         
