@@ -1,16 +1,8 @@
-import time
 import os
 import sys
-import setinput
+import setinputxml
 from lxml import etree
-
-
-def tstamp_folder(rpath):
-    sstamp = str(int(time.time()*1000))
-    if rpath[-1]!="/":
-        rpath=rpath+"/"
-    os.system("mkdir %s"%(rpath+sstamp))
-    return rpath+sstamp,sstamp
+import tstamp_folder
 
 
 def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
@@ -25,7 +17,7 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     inputtree = etree.parse(inputtemplatepath)
 
     for irun, sweepdic in enumerate(sweepdicarr):
-        runpath, rundir = tstamp_folder(runspath)
+        runpath, rundir = tstamp_folder.tstamp_folder(runspath)
         os.chdir(runpath)
         sweeplog.write("\n"+"runpath  "+runpath+"\n")
         rundirlog.write(runpath+"\n")
@@ -42,9 +34,9 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
             inputdscr=inputdscr+"sweeping variable: "+xpath+"\n"
             inputdscr=inputdscr+"value: "+value+"\n"
             
-            setinput.setByXpath(inputtree,xpath,value)
+            setinputxml.setByXpath(inputtree,xpath,value)
         
-        setinput.setByXpath(inputtree,"/input/keywords",inputdscr)
+        setinputxml.setByXpath(inputtree,"/input/keywords",inputdscr)
 
         inputtree.write(runpath+"/input.xml",pretty_print="true")
         

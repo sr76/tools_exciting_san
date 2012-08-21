@@ -1,5 +1,13 @@
 import os
 
+"""
+runlistpath: path to a file containing in each line the path to the 
+directory where the input.xml (and eventually other needed input files) 
+file are for each of the exciting run.
+
+runcommand: the command with which exciting will be run, for example 
+"qsub script" or "excitingser > output" or whatever.
+"""
 
 def runlist(runlistpath,runcommand):
     runs = open(runlistpath,"r")

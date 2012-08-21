@@ -2,7 +2,7 @@ from lxml import etree
 
 
 
-def setbyxpath(inputtree,xpath,value):
+def setByXpath(inputtree,xpath,value):
     if "@" in xpath:
         element = xpath.split("/@")[0]
         attrib = xpath.split("/@")[1]
