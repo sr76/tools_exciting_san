@@ -54,7 +54,7 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
 
 runspath="/home1/srigamonti/projects/cobalt_bulk/runs"
 resultspath="/home1/srigamonti/projects/cobalt_bulk/results/sweepnempty"
-inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/runs/1345477785053/input.xml"
+inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/runs/1345479936277/input.xml"
 sweepdicarr=[]
 sweepdicarr.append({"/input/groundstate/@nempty":"1"})
 sweepdicarr.append({"/input/groundstate/@nempty":"2"})
