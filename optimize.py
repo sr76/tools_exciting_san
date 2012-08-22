@@ -5,13 +5,26 @@ import setinputxml
 import queryinfoxml
 from lxml import etree
 import tstamp_folder
+import amoeba
 
 def optimize(runpath,resultspath,inputtemplatepath,vararr,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,runcommandstring):
     optimizelog = open(resultspath+"/optimize.log","w+")
     optimizelog.write("runpath  "+runspath+"\n")
     optimizelog.write("resultspath  "+resultspath+"\n")
     optimizelog.write("inputtemplatepath  "+inputtemplatepath+"\n")
-        
+    
+    optimizelog.write("Variables:\n")
+    
+    for var in vararr:
+        optimizelog.write("xpath: "+var[0]+"\n")
+        optimizelog.write("guess: "+str(var[1])+"\n")
+        optimizelog.write("scale: "+str(var[2])+"\n")
+
+
+    amoeba
+
+    optimizelog.close()
+
 
 
 def energy(var, data):
@@ -21,6 +34,7 @@ def energy(var, data):
     xpath = data[3]
     
     os.chdir(runpath)
+    os.system("rm -f info.xml")
     
     inputtree = etree.parse(inputtemplatepath)
 
@@ -31,8 +45,6 @@ def energy(var, data):
 
     inputtree.write(runpath+"/input.xml",pretty_print="true")
 
-    os.chdir(runpath)
-    os.system("rm -f info.xml")
     
     os.system(runcommand)
     
@@ -44,5 +56,11 @@ def energy(var, data):
 
 runpath = tstamp_folder.tstamp_folder("/home1/srigamonti/projects/cobalt_bulk/runs")
 resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell"
+inputtemplatepath = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227"
+vararr = []
+vararr.append(["/input/structure/crystal/@scale",4.74,0.05])
+vararr.append(["/input/structure/crystal/basevect[3][3]",1.623,0.05])
+runcommandstring = "mpi.py 2 12"
 
+optimize(runpath,resultspath,inputtemplatepath,vararr,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,runcommandstring)
 
