@@ -69,7 +69,7 @@ def energy(var, data):
 
 runpath,sstamp = tstamp_folder.tstamp_folder("/home1/srigamonti/projects/cobalt_bulk/runs")
 resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell"
-inputtemplatepath = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227"
+inputtemplatepath = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227/input.xml"
 vararr = []
 vararr.append(["/input/structure/crystal/@scale",4.74,0.05])
 vararr.append(["/input/structure/crystal/basevect[3][3]",1.623,0.05])

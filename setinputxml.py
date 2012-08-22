@@ -49,7 +49,7 @@ def setByXpath(inputtree,xpath,value):
 
     else:
         if "][" in xpath:
-            # In this case, the xpath is something like
+            # In this case, the xpath could be something like
             # /input/structure/crystal/basevect[3][3]
             # where we want to address the third component of the third basevect vector.
             basexpath = xpath.split("][")[-2]+"]"
@@ -64,6 +64,8 @@ def setByXpath(inputtree,xpath,value):
 
 
 """
+# Just for testing purposes
+
 inputtree = etree.parse("/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227/input.xml")
 
 xpath = "/input/structure/crystal/basevect[3][3]"
