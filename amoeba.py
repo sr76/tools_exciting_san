@@ -115,6 +115,8 @@ def amoeba(var,scale,func,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,data=None,
         logfile.write("%f\t"%(fvalue[ssbest]))
         for value in simplex[ssbest]:
             logfile.write("%f\t"%(value))
+        logfile.write("\n")
+        logfile.flush()
 
         # have we converged?
         if (((ftolerance <= 0.0 or frange < ftolerance) and    # converged to maximum
