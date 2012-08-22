@@ -7,7 +7,7 @@ from lxml import etree
 import tstamp_folder
 import amoeba
 
-def optimize(runpath,resultspath,inputtemplatepath,vararr,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,runcommandstring):
+def optimize(runpath,resultspath,inputtemplatepath,vararr,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,runcommand):
     optimizelog = open(resultspath+"/optimize.log","w+")
     optimizelog.write("runpath  "+runspath+"\n")
     optimizelog.write("resultspath  "+resultspath+"\n")
@@ -20,8 +20,19 @@ def optimize(runpath,resultspath,inputtemplatepath,vararr,ftolerance=1.e-4,xtole
         optimizelog.write("guess: "+str(var[1])+"\n")
         optimizelog.write("scale: "+str(var[2])+"\n")
 
-
-    amoeba
+    guess = []
+    scale = []
+    data = []
+    data.append(runpath)
+    data.append(inputtemplatepath)
+    data.append(runcommand)
+    data.append([])
+    for var in vararr:
+        data[-1].append(var[0]) # build xpath array
+        guess.append(var[1]) # build array of initial guess values for the variables
+        scale.append(var[2])
+ 
+    amoeba(guess,scale,energy,ftolerance,xtolerance,itmax,data)
 
     optimizelog.close()
 
