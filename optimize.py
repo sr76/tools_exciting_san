@@ -27,9 +27,9 @@ def optimize(runpath,resultspath,inputtemplatepath,vararr,runcommand,ftolerance=
         optimizelog.write("xpath: "+var[0]+"\n")
         optimizelog.write("guess: "+str(var[1])+"\n")
         optimizelog.write("scale: "+str(var[2])+"\n")
-        inputdscr = inputdscr + "xpath: "+var[0]+"\n"
-        inputdscr = inputdscr + "guess: "+var[1]+"\n"
-        inputdscr = inputdscr + "scale: "+var[2]+"\n"
+        inputdscr = inputdscr + "xpath: "+str(var[0])+"\n"
+        inputdscr = inputdscr + "guess: "+str(var[1])+"\n"
+        inputdscr = inputdscr + "scale: "+str(var[2])+"\n"
 
     optimizelog.flush()
 
@@ -81,12 +81,12 @@ def energy(var, data):
 
 
 runpath,sstamp = tstamp_folder.tstamp_folder("/home1/srigamonti/projects/cobalt_bulk/runs")
-resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell2"
+resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell"
 inputtemplatepath = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227/input.xml"
 vararr = []
 vararr.append(["/input/structure/crystal/@scale",4.74,0.05])
 vararr.append(["/input/structure/crystal/basevect[3][3]",1.623,0.05])
 runcommandstring = "mpi.py 2 12"
 
-optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-1,xtolerance=1.e-1,itmax=500)
+optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-2,xtolerance=1.e-2,itmax=500)
 

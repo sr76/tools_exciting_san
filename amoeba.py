@@ -106,15 +106,15 @@ def amoeba(var,scale,func,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,data=None,
 
         # find the range of the function values
         fscale = (abs(fvalue[ssbest])+abs(fvalue[ssworst]))/2.0
-        if fscale != 0.0:
+          if fscale != 0.0:
             frange = abs(fvalue[ssbest]-fvalue[ssworst])/fscale
         else:
             frange = 0.0  # all the fvalues are zero in this case
             
         logfile.write("%d\t"%(iteration))
-        logfile.write("%f\t"%(fvalue[ssbest]))
+        logfile.write("%1.10f\t"%(fvalue[ssbest]))
         for value in simplex[ssbest]:
-            logfile.write("%f\t"%(value))
+            logfile.write("%1.10f\t"%(value))
         logfile.write("\n")
         logfile.flush()
 
