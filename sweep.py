@@ -1,9 +1,34 @@
+#!/usr/bin/python
+
 import os
 import sys
 import setinputxml
 from lxml import etree
 import tstamp_folder
+import time
+sys.path.append(os.getcwd())
+import sweepconfig # sweepconfig.py should be present in your current working directory for this script to work
 
+
+"""
+# Find below an example of the contents of sweepconfig.py
+
+runspath="/home1/srigamonti/projects/cobalt_bulk/runs"
+resultspath="/home1/srigamonti/projects/cobalt_bulk/results/sweepnempty"
+inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/runs/1345479936277/input.xml"
+sweepdicarr=[]
+sweepdicarr.append({"/input/groundstate/@nempty":"1"})
+sweepdicarr.append({"/input/groundstate/@nempty":"2"})
+sweepdicarr.append({"/input/groundstate/@nempty":"3"})
+sweepdicarr.append({"/input/groundstate/@nempty":"4"})
+sweepdicarr.append({"/input/groundstate/@nempty":"5"})
+sweepdicarr.append({"/input/groundstate/@nempty":"6"})
+sweepdicarr.append({"/input/groundstate/@nempty":"7"})
+sweepdicarr.append({"/input/groundstate/@nempty":"8"})
+sweepdicarr.append({"/input/groundstate/@nempty":"9"})
+sweepdicarr.append({"/input/groundstate/@nempty":"10"})
+
+"""
 
 def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     sweeplog = open(resultspath+"/sweep.log","w+")
@@ -17,6 +42,7 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     inputtree = etree.parse(inputtemplatepath)
 
     for irun, sweepdic in enumerate(sweepdicarr):
+        time.sleep(1)
         runpath, rundir = tstamp_folder.tstamp_folder(runspath)
         os.chdir(runpath)
         sweeplog.write("\n"+"runpath  "+runpath+"\n")
@@ -43,21 +69,6 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
         
     sweeplog.close()
     rundirlog.close()
-
-runspath="/home1/srigamonti/projects/cobalt_bulk/runs"
-resultspath="/home1/srigamonti/projects/cobalt_bulk/results/sweepnempty"
-inputtemplatepath="/home1/srigamonti/projects/cobalt_bulk/runs/1345479936277/input.xml"
-sweepdicarr=[]
-sweepdicarr.append({"/input/groundstate/@nempty":"1"})
-sweepdicarr.append({"/input/groundstate/@nempty":"2"})
-sweepdicarr.append({"/input/groundstate/@nempty":"3"})
-sweepdicarr.append({"/input/groundstate/@nempty":"4"})
-sweepdicarr.append({"/input/groundstate/@nempty":"5"})
-sweepdicarr.append({"/input/groundstate/@nempty":"6"})
-sweepdicarr.append({"/input/groundstate/@nempty":"7"})
-sweepdicarr.append({"/input/groundstate/@nempty":"8"})
-sweepdicarr.append({"/input/groundstate/@nempty":"9"})
-sweepdicarr.append({"/input/groundstate/@nempty":"10"})
 
 
 sweep(runspath,resultspath,inputtemplatepath,sweepdicarr)
