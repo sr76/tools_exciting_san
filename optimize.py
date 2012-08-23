@@ -49,12 +49,12 @@ def optimize(runpath,resultspath,inputtemplatepath,vararr,runcommand,ftolerance=
  
     simplex,fvalue,iteration = amoeba.amoeba(guess,scale,energy,ftolerance,xtolerance,itmax,data,amoebalog)
 
-    logfile.write("%d\t"%(iteration))
-    logfile.write("%1.10f\t"%(fvalue))
+    amoebalog.write("%d\t"%(iteration))
+    amoebalog.write("%1.10f\t"%(fvalue))
     for value in simplex:
-        logfile.write("%1.10f\t"%(value))
-    logfile.write("\n")
-    logfile.flush()
+        amoebalog.write("%1.10f\t"%(value))
+    amoebalog.write("\n")
+    amoebalog.flush()
 
     optimizelog.close()
     amoebalog.close()
