@@ -7,7 +7,7 @@ from lxml import etree
 import tstamp_folder
 import time
 sys.path.append(os.getcwd())
-import sweepconfig # sweepconfig.py should be present in your current working directory for this script to work
+import sweepconfig as sc # sweepconfig.py should be present in your current working directory for this script to work
 
 
 """
@@ -42,7 +42,7 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     inputtree = etree.parse(inputtemplatepath)
 
     for irun, sweepdic in enumerate(sweepdicarr):
-        time.sleep(1)
+        time.sleep(0.1)
         runpath, rundir = tstamp_folder.tstamp_folder(runspath)
         os.chdir(runpath)
         sweeplog.write("\n"+"runpath  "+runpath+"\n")
@@ -55,12 +55,12 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
 
         for xpath,value in sweepdic.items():
             sweeplog.write("\t"+"sweepvar  "+xpath+"\n")
-            sweeplog.write("\t"+"value  "+value+"\n")
+            sweeplog.write("\t"+"value  "+str(value)+"\n")
 
             inputdscr=inputdscr+"sweeping variable: "+xpath+"\n"
-            inputdscr=inputdscr+"value: "+value+"\n"
+            inputdscr=inputdscr+"value: "+str(value)+"\n"
             
-            setinputxml.setByXpath(inputtree,xpath,value)
+            setinputxml.setByXpath(inputtree,xpath,str(value))
         
         setinputxml.setByXpath(inputtree,"/input/keywords",inputdscr)
 
@@ -71,7 +71,7 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     rundirlog.close()
 
 
-sweep(runspath,resultspath,inputtemplatepath,sweepdicarr)
+sweep(sc.runspath,sc.resultspath,sc.inputtemplatepath,sc.sweepdicarr)
 
 
 
