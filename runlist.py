@@ -1,5 +1,16 @@
+#!/usr/bin/python
 import os
+sys.path.append(os.getcwd())
+import runlistconfig as rlc # runlistconfig.py should be present in your current working directory for this script to work
 
+
+"""
+# Example of file runlistconfig.py that should be present in your working directory
+
+runlistpath = "/home1/srigamonti/projects/cobalt_bulk/results/sweepnempty/rundir.log"
+runcommand = "mpi.py 2 12"
+
+"""
 """
 runlistpath: path to a file containing in each line the path to the 
 directory where the input.xml (and eventually other needed input files) 
@@ -19,8 +30,5 @@ def runlist(runlistpath,runcommand):
 
 
 
-#runlistpath = "/home1/srigamonti/projects/cobalt_bulk/results/sweeprgkmax/rundir.log"
-runlistpath = "/home1/srigamonti/projects/cobalt_bulk/results/sweepnempty/rundir.log"
-runcommand = "mpi.py 2 12"
-runlist(runlistpath,runcommand)
+runlist(rlc.runlistpath,rlc.runcommand)
 
