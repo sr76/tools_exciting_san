@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import sys
 sys.path.append(os.getcwd())
 import runlistconfig as rlc # runlistconfig.py should be present in your current working directory for this script to work
 
