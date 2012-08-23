@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import time
 import os
 import sys
@@ -6,6 +8,15 @@ import queryinfoxml
 from lxml import etree
 import tstamp_folder
 import amoeba
+
+
+
+def read_optimize_input():
+    conf = open("optimize.config","r")
+    for line in conf:
+        print line
+
+    return runpath,resultspath,inputtemplatepath,runcommand,ftolerance,xtolerance,itmax
 
 def optimize(runpath,resultspath,inputtemplatepath,vararr,runcommand,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500):
     amoebalog = open(resultspath+"/amoeba.log","w+")
@@ -89,6 +100,13 @@ def energy(var, data):
     return -queryinfoxml.getLastTotalEnergy()
 
 
+
+runpath,resultspath,inputtemplatepath,runcommand,ftolerance,xtolerance,itmax = read_optimize_input()
+runpath,sstamp = tstamp_folder.tstamp_folder(runpath)
+# optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-2,xtolerance=1.e-2,itmax=500)
+
+
+"""
 runpath,sstamp = tstamp_folder.tstamp_folder("/home1/srigamonti/projects/cobalt_bulk/runs")
 resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell"
 inputtemplatepath = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227/input.xml"
@@ -98,4 +116,4 @@ vararr.append(["/input/structure/crystal/basevect[3][3]",1.623,0.05])
 runcommandstring = "mpi.py 2 12"
 
 optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-2,xtolerance=1.e-2,itmax=500)
-
+"""
