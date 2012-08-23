@@ -47,7 +47,14 @@ def optimize(runpath,resultspath,inputtemplatepath,vararr,runcommand,ftolerance=
         guess.append(var[1]) # build array of initial guess values for the variables
         scale.append(var[2])
  
-    amoeba.amoeba(guess,scale,energy,ftolerance,xtolerance,itmax,data,amoebalog)
+    simplex,fvalue,iteration = amoeba.amoeba(guess,scale,energy,ftolerance,xtolerance,itmax,data,amoebalog)
+
+    logfile.write("%d\t"%(iteration))
+    logfile.write("%1.10f\t"%(fvalue))
+    for value in simplex:
+        logfile.write("%1.10f\t"%(value))
+    logfile.write("\n")
+    logfile.flush()
 
     optimizelog.close()
     amoebalog.close()
