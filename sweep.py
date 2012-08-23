@@ -41,11 +41,7 @@ def sweep(runspath,resultspath,inputtemplatepath,sweepdicarr):
     inputtree = etree.parse(inputtemplatepath)
 
     for irun, sweepdic in enumerate(sweepdicarr):
-<<<<<<< HEAD
         time.sleep(0.1)
-=======
-        time.sleep(1)
->>>>>>> b26558d546804c6a789d0cc7e4979a02f0225e39
         runpath, rundir = tstamp_folder.tstamp_folder(runspath)
         os.chdir(runpath)
         sweeplog.write("\n"+"runpath  "+runpath+"\n")
