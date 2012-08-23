@@ -83,6 +83,14 @@ def optimize(runpath,resultspath,inputtemplatepath,vararr,runcommand,ftolerance=
     amoebalog.write("\n")
     amoebalog.flush()
 
+    optimizelog.write("\nOptimization converged after %d iterations of amoeba.py\n"%(iteration))
+    optimizelog.write("\nOptimized variables found:\n")
+    for i,var in enumerate(vararr):
+        optimizelog.write("xpath: "+var[0]+"\n")
+        optimizelog.write("optimized value: %1.0f\n\n"%(simplex[i]))
+
+    optimizelog.flush()
+
     optimizelog.close()
     amoebalog.close()
 
@@ -117,6 +125,7 @@ def energy(var, data):
 
 
 runpath,resultspath,inputtemplatepath,runcommandstring,ftolerance,xtolerance,itmax,vararr = read_optimize_input()
+
 print "runpath: ",runpath
 print "resultspath: ",resultspath
 print "inputtemplatepath: ",inputtemplatepath
@@ -132,14 +141,3 @@ for var in vararr:
 runpath,sstamp = tstamp_folder.tstamp_folder(runpath)
 optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-2,xtolerance=1.e-2,itmax=500)
 
-"""
-runpath,sstamp = tstamp_folder.tstamp_folder("/home1/srigamonti/projects/cobalt_bulk/runs")
-resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell"
-inputtemplatepath = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227/input.xml"
-vararr = []
-vararr.append(["/input/structure/crystal/@scale",4.74,0.05])
-vararr.append(["/input/structure/crystal/basevect[3][3]",1.623,0.05])
-runcommandstring = "mpi.py 2 12"
-
-optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-2,xtolerance=1.e-2,itmax=500)
-"""
