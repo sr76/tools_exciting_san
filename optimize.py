@@ -13,10 +13,26 @@ import amoeba
 
 def read_optimize_input():
     conf = open("optimize.config","r")
-    for line in conf:
-        print line
+    lines = []
 
-    return runpath,resultspath,inputtemplatepath,runcommand,ftolerance,xtolerance,itmax
+    for line in conf:
+        lines.append(line.split())
+        
+    print lines
+    runpath = lines[0][0].strip('"')
+    resultspath = lines[1][0].strip('"')
+    inputtemplatepath = lines[2][0].strip('"')
+    runcommand = "  ".join(lines[3]).strip('"')
+    ftolerance = lines[4][0]
+    xtolerance = lines[5][0]
+    itmax = lines[6][0]
+
+    vararr=[]
+    ndata = len(lines)
+    for i in range(7,ndata):
+        vararr.append([str(lines[i][0]).strip('"'),float(lines[i][1]),float(lines[i][2])])
+    
+    return runpath,resultspath,inputtemplatepath,runcommand,ftolerance,xtolerance,itmax,vararr
 
 def optimize(runpath,resultspath,inputtemplatepath,vararr,runcommand,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500):
     amoebalog = open(resultspath+"/amoeba.log","w+")
@@ -100,11 +116,21 @@ def energy(var, data):
     return -queryinfoxml.getLastTotalEnergy()
 
 
+runpath,resultspath,inputtemplatepath,runcommandstring,ftolerance,xtolerance,itmax,vararr = read_optimize_input()
+print "runpath: ",runpath
+print "resultspath: ",resultspath
+print "inputtemplatepath: ",inputtemplatepath
+print "runcommand: ",runcommandstring
+print "ftolerance: ",ftolerance
+print "xtolerance: ",xtolerance
+print "itmax: ",itmax
+for var in vararr:
+    print "+ xpath: "+var[0]
+    print "  -guess: "+str(var[1])
+    print "  -scale: "+str(var[2])
 
-runpath,resultspath,inputtemplatepath,runcommand,ftolerance,xtolerance,itmax = read_optimize_input()
 runpath,sstamp = tstamp_folder.tstamp_folder(runpath)
-# optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-2,xtolerance=1.e-2,itmax=500)
-
+optimize(runpath,resultspath,inputtemplatepath,vararr,runcommandstring,ftolerance=1.e-2,xtolerance=1.e-2,itmax=500)
 
 """
 runpath,sstamp = tstamp_folder.tstamp_folder("/home1/srigamonti/projects/cobalt_bulk/runs")
