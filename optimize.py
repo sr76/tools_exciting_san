@@ -61,6 +61,7 @@ def energy(var, data):
     
     os.chdir(runpath)
     os.system("rm -f info.xml")
+   
     
     inputtree = etree.parse("input.xml")
 
