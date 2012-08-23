@@ -47,7 +47,14 @@ def optimize(runpath,resultspath,inputtemplatepath,vararr,runcommand,ftolerance=
         guess.append(var[1]) # build array of initial guess values for the variables
         scale.append(var[2])
  
-    amoeba.amoeba(guess,scale,energy,ftolerance,xtolerance,itmax,data,amoebalog)
+    simplex,fvalue,iteration = amoeba.amoeba(guess,scale,energy,ftolerance,xtolerance,itmax,data,amoebalog)
+
+    amoebalog.write("%d\t"%(iteration))
+    amoebalog.write("%1.10f\t"%(fvalue))
+    for value in simplex:
+        amoebalog.write("%1.10f\t"%(value))
+    amoebalog.write("\n")
+    amoebalog.flush()
 
     optimizelog.close()
     amoebalog.close()
@@ -83,7 +90,7 @@ def energy(var, data):
 
 
 runpath,sstamp = tstamp_folder.tstamp_folder("/home1/srigamonti/projects/cobalt_bulk/runs")
-resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell2"
+resultspath = "/home1/srigamonti/projects/cobalt_bulk/results/optimizeunitcell"
 inputtemplatepath = "/home1/srigamonti/projects/cobalt_bulk/runs/1345479936227/input.xml"
 vararr = []
 vararr.append(["/input/structure/crystal/@scale",4.74,0.05])

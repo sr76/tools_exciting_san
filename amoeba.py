@@ -82,7 +82,7 @@ def amoeba(var,scale,func,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,data=None,
     # Ooze the simplex to the maximum
 
     iteration = 0
-    
+    oldf=0
     while 1:
         # find the index of the best and worst vertices in the simplex
         ssworst = 0
@@ -106,17 +106,20 @@ def amoeba(var,scale,func,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,data=None,
 
         # find the range of the function values
         fscale = (abs(fvalue[ssbest])+abs(fvalue[ssworst]))/2.0
-        if fscale != 0.0:
+          if fscale != 0.0:
             frange = abs(fvalue[ssbest]-fvalue[ssworst])/fscale
         else:
             frange = 0.0  # all the fvalues are zero in this case
+
+        if iteration == 0 or fvalue[ssbest]!=oldf:
+            logfile.write("%d\t"%(iteration))
+            logfile.write("%1.10f\t"%(fvalue[ssbest]))
+            for value in simplex[ssbest]:
+                logfile.write("%1.10f\t"%(value))
+            logfile.write("\n")
+            logfile.flush()
+            oldf = fvalue[ssbest]
             
-        logfile.write("%d\t"%(iteration))
-        logfile.write("%f\t"%(fvalue[ssbest]))
-        for value in simplex[ssbest]:
-            logfile.write("%f\t"%(value))
-        logfile.write("\n")
-        logfile.flush()
 
         # have we converged?
         if (((ftolerance <= 0.0 or frange < ftolerance) and    # converged to maximum
