@@ -106,7 +106,7 @@ def amoeba(var,scale,func,ftolerance=1.e-4,xtolerance=1.e-4,itmax=500,data=None,
 
         # find the range of the function values
         fscale = (abs(fvalue[ssbest])+abs(fvalue[ssworst]))/2.0
-          if fscale != 0.0:
+        if fscale != 0.0:
             frange = abs(fvalue[ssbest]-fvalue[ssworst])/fscale
         else:
             frange = 0.0  # all the fvalues are zero in this case
