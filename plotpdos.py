@@ -8,16 +8,8 @@ from lxml import etree
 
 dostree=etree.parse("dos.xml")
 
-points = dostree.xpath('/dos/totaldos/diagram')[0]
 spins = dostree.xpath('/dos/totaldos/diagram//@nspin')
-"""
-print spins
 
-for spin in spins:
-    print int(spin)
-
-sys.exit()
-"""
 xdata=[]
 ydata=[]
 legends = []
