@@ -11,6 +11,11 @@ bandstree=etree.parse("bandstructure.xml")
 bands = bandstree.xpath('/bandstructure/band')
 nbands = len(bands)
 
+vertex_x = bandstree.xpath('/bandstructure/vertex//@distance')
+vertex_ymax = bandstree.xpath('/bandstructure/vertex//@upperboundary')
+vertex_ymin = bandstree.xpath('/bandstructure/vertex//@lowerboundary')
+nvertex = len(vertex_x)
+
 xdata=[]
 ydata=[]
 legends = []
@@ -25,6 +30,11 @@ for band in range(nbands):
         xdata[band][i]=float(xdata[band][i])
     for i,x in enumerate(ydata[band]):
         ydata[band][i]=float(ydata[band][i])
+
+for i in range(nvertex):
+    vertex_x[i] = float(vertex_x[i])
+    vertex_ymax[i] = float(vertex_ymax[i])
+    vertex_ymin[i] = float(vertex_ymin[i])
 
 
 #-------------------------------------------------------------------------------
@@ -54,6 +64,14 @@ ax=fig.add_subplot(111)
 for band in range(nbands):
     ax.plot(xdata[band],ydata[band],'k')
 
+ax.plot(xdata[band],[0]*len(xdata[band]),'r:')
+
+for i in range(1,nvertex-1):
+    #ax.axvline(vertex_x[i],vertex_ymin[i],vertex_ymax[i])
+    ax.axvline(vertex_x[i],linewidth=1,color='0.8')
+
+ax.set_xlim(0.0,xdata[band][-1])
+
 ax.legend(loc=2)
 #ax.legend()
 
@@ -65,6 +83,4 @@ ax.legend(loc=2)
 #plt.savefig('PLOT.ps',  orientation='portrait',format='eps')
 #plt.savefig('PLOT.png', orientation='portrait',format='png')
 plt.show()
-
-
 
