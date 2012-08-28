@@ -16,6 +16,9 @@ def getTotalMagneticMoment():
     tree = etree.parse("info.xml")
     return float(tree.xpath('/info/groundstate/scl/iter[last()]/moments/momtot/@x')[0])
 
+def getFermiEnergy():
+    tree = etree.parse("info.xml")
+    return float(tree.xpath('/info/groundstate/scl/iter[last()]/energies/@fermiEnergy')[0])
 
 """
 # Just for testing purposes
