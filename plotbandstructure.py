@@ -6,6 +6,8 @@ import os
 import sys
 from lxml import etree
 
+args = sys.argv[1:]
+
 bandstree=etree.parse("bandstructure.xml")
 
 bands = bandstree.xpath('/bandstructure/band')
@@ -35,7 +37,6 @@ for i in range(nvertex):
     vertex_x[i] = float(vertex_x[i])
     vertex_ymax[i] = float(vertex_ymax[i])
     vertex_ymin[i] = float(vertex_ymin[i])
-
 
 #-------------------------------------------------------------------------------
 #Plot BANDS
@@ -73,6 +74,28 @@ for i in range(1,nvertex-1):
 ax.set_xlim(0.0,xdata[band][-1])
 
 ax.legend(loc=2)
+
+
+ymin=None
+ymax=None
+if "-ymin" in args:
+    iymin = int(args.index("-ymin"))+1
+    ymin = float(args[iymin])
+if "-ymax" in args:
+    iymax = int(args.index("-ymax"))+1
+    ymax = float(args[iymax])
+xmin=None
+xmax=None
+if "-xmin" in args:
+    ixmin = int(args.index("-xmin"))+1
+    xmin = float(args[ixmin])
+if "-xmax" in args:
+    ixmax = int(args.index("-xmax"))+1
+    xmax = float(args[ixmax])
+
+ax.set_ylim(ymin,ymax)
+ax.set_xlim(xmin,xmax)
+
 #ax.legend()
 
 #ax.set_xlim(0.0,54.0)
