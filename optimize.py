@@ -18,7 +18,7 @@ def read_optimize_input():
     for line in conf:
         lines.append(line.split())
         
-    print lines
+    #print lines
     runpath = lines[0][0].strip('"')
     resultspath = lines[1][0].strip('"')
     inputtemplatepath = lines[2][0].strip('"')
