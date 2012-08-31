@@ -104,6 +104,9 @@ ax.set_xlim(xmin,xmax)
 #ax.set_ylabel(str.capitalize(labels[0]["ylabel"]))
 
 #plt.savefig('PLOT.ps',  orientation='portrait',format='eps')
-#plt.savefig('PLOT.png', orientation='portrait',format='png')
-plt.show()
+
+if "-png" in args:
+    plt.savefig('PLOT.png', orientation='portrait',format='png')
+else:
+    plt.show()
 
