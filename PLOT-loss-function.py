@@ -35,6 +35,7 @@ for i,fname in enumerate(fnames):
     sfname = fname.split("/")[-1].split("_")
     if "FXCRPA" in sfname: legend="RPA "
     if "FXCALDA" in sfname: legend="ALDA "
+    if "BSEsinglet" in sfname: legend="BSE "
     if not "NLF" in sfname: legend=legend+"(LFE) "
     if "NLF" in sfname: legend=legend+"(no-LFE) "
     if sfname[-2][0:2]=="OC": legend=legend+"Optical(%s)"%(sfname[-2][2:])
